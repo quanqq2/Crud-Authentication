@@ -1,6 +1,4 @@
 
-const secret = async (req,res)=>{
+exports.secret = async (req,res)=>{
     console.log('token')
 }
-
-module.exports = {secret} 
