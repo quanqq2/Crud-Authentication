@@ -78,3 +78,15 @@ exports.deletepost = async (req,res)=>{
   }
 }
 
+exports.getallposts = async (req, res) => {
+  try {
+    const { authorid } = req.params;
+    const allposts = await Post.find({ author: authorid }).populate('author');
+    if (!allposts.length) {
+      return res.status(404).json({ message: 'No author'});
+    }
+    res.json({ posts: allposts.map(post => post.toObject({ getters: true })) });
+  } catch (error) {
+    res.status(500).json({error: error});
+  }
+}
